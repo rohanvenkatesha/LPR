@@ -382,7 +382,7 @@ import {
   Monitor,
   AlertCircle
 } from 'lucide-react';
-
+//
 // --- Types & Interfaces ---
 interface PlateData {
   plate?: string;
