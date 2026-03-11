@@ -1,41 +1,93 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
+# --------------------
+# Node / Next.js
+# --------------------
 # dependencies
 /node_modules
 /.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+.pnp.js
 
-# testing
-/coverage
-
-# next.js
+# next.js build output
 /.next/
 /out/
+/build/
 
-# production
-/build
+# dotenv environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# npm logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# testing
+/coverage/
+
+# local env files
+*.local
 
 # misc
 .DS_Store
 *.pem
+*.log
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
+# --------------------
+# Python
+# --------------------
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
 
-# env files (can opt-in for committing if needed)
-.env*
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+*.wheel
 
-# vercel
-.vercel
+# Virtual environments
+venv/
+env/
+ENV/
+.env/
+.venv/
+venv310/
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Python logs
+*.log
+
+# Pytest cache
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+
+# --------------------
+# IDEs / Editors
+# --------------------
+# VSCode
+.vscode/
+.history/
+
+# PyCharm
+.idea/
+
+# Sublime
+*.sublime-project
+*.sublime-workspace
+
+# --------------------
+# OS generated
+# --------------------
+.DS_Store
+Thumbs.db
+
+
+license_dataset/
+license_dataset.zip
+detected_output.mp4
