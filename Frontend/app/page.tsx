@@ -186,11 +186,11 @@ const App: React.FC = () => {
             </div>
             <div>
               <h1 className="text-3xl font-black tracking-[0.15em] text-white">
-                V-SCAN<span className="text-cyan-500">.OS</span>
+                LPR<span className="text-cyan-500">.OS</span>
               </h1>
               <div className="flex items-center gap-2 mt-1">
                 <span className="h-1 w-1 bg-cyan-500 rounded-full animate-ping"></span>
-                <p className="text-[10px] text-cyan-500/80 font-bold uppercase tracking-[0.3em]">Neural Extraction Interface v7.0.2</p>
+                <p className="text-[10px] text-cyan-500/80 font-bold uppercase tracking-[0.3em]">License Plate Recognition v7.0.2</p>
               </div>
             </div>
           </div>
