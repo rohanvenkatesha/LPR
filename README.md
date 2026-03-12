@@ -408,7 +408,7 @@ These scripts help verify whether your system supports GPU acceleration.
 
 # 🖥 UI Preview
 
-[UI Preview](Frontend/public/ui-preview.png)
+![UI Preview](Frontend/public/ui-preview.png)
 
 ---
 
