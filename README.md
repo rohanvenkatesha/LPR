@@ -1,4 +1,4 @@
-# 🚗 AI License Plate Recognition System
+# 🚗 License Plate Recognition System
 
 A full-stack **License Plate Recognition (LPR)** system built using **Computer Vision, FastAPI, and Next.js**.
 The system detects vehicle license plates from uploaded videos, extracts plate text using OCR, streams detected plates live to the frontend using WebSockets, and generates downloadable logs and processed videos.
