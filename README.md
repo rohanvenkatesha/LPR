@@ -454,9 +454,10 @@ temp/
 
 # 👨‍💻 Author
 
-**Rohan**
-Software Engineer
-https://rohanvenkatesha.vercel.app/
+**Rohan Venkatesha**  
+Software Engineer  
+
+🌐 [Portfolio](https://rohanvenkatesha.vercel.app/)
 
 ---
 
