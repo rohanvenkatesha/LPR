@@ -455,7 +455,8 @@ temp/
 # 👨‍💻 Author
 
 **Rohan**
-AI / Computer Vision Developer
+Software Engineer
+https://rohanvenkatesha.vercel.app/
 
 ---
 
