@@ -212,8 +212,8 @@ NEXT_PUBLIC_WS_URL=ws://localhost:8000/ws
 ### Example Production Configuration
 
 ```env
-NEXT_PUBLIC_BACKEND_URL=https://lpr-fg7s.onrender.com
-NEXT_PUBLIC_WS_URL=wss://lpr-fg7s.onrender.com/ws
+NEXT_PUBLIC_BACKEND_URL=https://your-production-backend.com
+NEXT_PUBLIC_WS_URL=wss://your-production-backend.com/ws
 ```
 
 ---
