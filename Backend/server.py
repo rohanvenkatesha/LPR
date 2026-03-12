@@ -30,7 +30,6 @@ app = FastAPI(
 # from fastapi.middleware.cors import CORSMiddleware
 
 origins = [
-    "https://lprengine.vercel.app",
     "http://localhost:3000"  # Add your frontend URL here
 ]
 
