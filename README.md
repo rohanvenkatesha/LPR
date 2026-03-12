@@ -54,7 +54,7 @@ project-root
 │   │   └── ai_models.py
 │   │
 │   ├── production_models
-│   │   ├── yolo_plate_model.pt
+│   │   ├── license_plate_best.pt
 │   │   └── paddle_ocr_models
 │   │
 │   ├── routes
