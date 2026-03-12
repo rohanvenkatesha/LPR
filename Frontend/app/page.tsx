@@ -186,7 +186,7 @@ const App: React.FC = () => {
             </div>
             <div>
               <h1 className="text-3xl font-black tracking-[0.15em] text-white">
-                LPR<span className="text-cyan-500">.OS</span>
+                LPR ENGINE<span className="text-cyan-500">.OS</span>
               </h1>
               <div className="flex items-center gap-2 mt-1">
                 <span className="h-1 w-1 bg-cyan-500 rounded-full animate-ping"></span>
