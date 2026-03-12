@@ -408,17 +408,7 @@ These scripts help verify whether your system supports GPU acceleration.
 
 # 🖥 UI Preview
 
-Place your UI screenshot here:
-
-```
-Frontend/public/ui-preview.png
-```
-
-Add it to README:
-
-```
-![UI Preview](Frontend/public/ui-preview.png)
-```
+[UI Preview](Frontend/public/ui-preview.png)
 
 ---
 
