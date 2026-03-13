@@ -1,22 +1,53 @@
 # 🚗 License Plate Recognition System
 
-A full-stack **License Plate Recognition (LPR)** system built using **Computer Vision, FastAPI, and Next.js**.
-The system detects vehicle license plates from uploaded videos, extracts plate text using OCR, streams detected plates live to the frontend using WebSockets, and generates downloadable logs and processed videos.
+A full-stack **License Plate Recognition (LPR)** system built with **Computer Vision, FastAPI, and Next.js**.
+It detects license plates from uploaded videos, extracts plate text using OCR, streams detections live via **WebSockets**, and provides downloadable processed videos and CSV logs.
+
+---
+
+# 🐳 Docker Deployment (Recommended)
+
+We provide Docker files for **easy deployment**. By default, it runs on **CPU**.
+
+If you have a GPU and compatible CUDA, you can enable GPU support (optional).
+
+## Steps
+
+1. **Check your GPU (optional)**
+
+```bash
+python Backend/check/check_gpu.py
+```
+
+2. **CPU users:** No changes needed. Docker will install CPU dependencies.
+
+3. **GPU users:** If CUDA version is compatible (e.g., 12.1), uncomment the GPU line in `Backend/Dockerfile` and comment the CPU line.
+
+4. **Build and run with Docker Compose:**
+
+```bash
+docker-compose up --build
+```
+
+5. **Access the services:**
+
+| Service            | URL                                            |
+| ------------------ | ---------------------------------------------- |
+| Backend (FastAPI)  | [http://localhost:8000](http://localhost:8000) |
+| Frontend (Next.js) | [http://localhost:3000](http://localhost:3000) |
 
 ---
 
 # 📌 Features
 
-* Upload vehicle videos for processing
-* AI-based license plate detection
-* OCR-based plate text extraction
-* Live plate detection logs via WebSockets
-* Automatic CSV logging of detected plates
-* Download processed video with bounding boxes
-* Download CSV logs of detected plates
-* GPU support for faster inference
-* Modular backend architecture
-* Modern Next.js frontend dashboard
+* Upload vehicle videos
+* YOLO-based license plate detection
+* PaddleOCR text recognition
+* Live plate detection via WebSockets
+* CSV log of detected plates
+* Download processed video
+* GPU support (optional)
+* Modular backend and modern Next.js frontend
 
 ---
 
@@ -24,18 +55,17 @@ The system detects vehicle license plates from uploaded videos, extracts plate t
 
 ## Backend
 
-* Python
-* FastAPI
+* Python 3.10
+* FastAPI + Uvicorn
 * OpenCV
-* YOLO (License Plate Detection)
-* PaddleOCR (Text Recognition)
+* YOLO (license plate detection)
+* PaddleOCR (text recognition)
 * WebSockets
-* Uvicorn
 
 ## Frontend
 
-* Next.js
-* React
+* Next.js 14+
+* React 18+
 * Tailwind CSS
 
 ---
@@ -46,55 +76,43 @@ The system detects vehicle license plates from uploaded videos, extracts plate t
 project-root
 │
 ├── Backend
-│   │
 │   ├── server.py
-│   ├── requirements.txt
-│   │
-│   ├── models
-│   │   └── ai_models.py
-│   │
-│   ├── production_models
-│   │   ├── license_plate_best.pt
-│   │   └── paddle_ocr_models
-│   │
-│   ├── routes
-│   │   └── upload_routes.py
-│   │
-│   ├── services
-│   │   └── video_service.py
-│   │
-│   ├── utils
-│   │   └── plate_utils.py
-│   │
-│   ├── check
-│   │   ├── check_cpu.py
-│   │   ├── check_gpu.py
-│   │   └── check_cuda.py
-│   │
-│   └── temp
+│   ├── requirements_cpu.txt
+│   ├── requirements_gpu.txt
+│   ├── models/ai_models.py
+│   ├── production_models/license_plate_best.pt
+│   ├── production_models/paddle_ocr_models/
+│   ├── routes/upload_routes.py
+│   ├── services/video_service.py
+│   ├── utils/plate_utils.py
+│   ├── check/check_cpu.py
+│   ├── check/check_gpu.py
+│   ├── check/check_cuda.py
+│   └── temp/
 │       ├── input_video.mp4
 │       ├── detected_output.mp4
 │       └── plates_log.csv
 │
-└── Frontend
-    ├── .env.local
-    ├── package.json
-    ├── next.config.js
-    ├── app
-    ├── components
-    └── public
-        └── ui-preview.png
+├── Frontend
+│   ├── .env.local
+│   ├── package.json
+│   ├── next.config.js
+│   ├── app/
+│   ├── components/
+│   └── public/ui-preview.png
+│
+└── docker-compose.yml
 ```
 
 ---
 
 # 🧠 Model Training
 
-Dataset and training notebook are available on Kaggle:
+Dataset and training notebook available on Kaggle:
 
-https://www.kaggle.com/datasets/rohanvenkatesha/indian-license-plates
+[Indian License Plates Dataset](https://www.kaggle.com/datasets/rohanvenkatesha/indian-license-plates)
 
-The trained models used for inference are stored inside:
+Trained models used for inference are stored in:
 
 ```
 Backend/production_models/
@@ -102,154 +120,99 @@ Backend/production_models/
 
 ---
 
-# ⚙️ Backend Setup (FastAPI)
+# ⚙️ Manual Backend Setup (FastAPI)
 
-### 1️⃣ Navigate to Backend
+1. Navigate to backend:
 
 ```bash
 cd Backend
 ```
 
----
-
-### 2️⃣ Create Virtual Environment
+2. Create virtual environment:
 
 ```bash
 python -m venv venv
 ```
 
-Activate environment
+Activate environment:
 
-**Windows**
+* Windows:
 
 ```bash
 venv\Scripts\activate
 ```
 
-**Mac / Linux**
+* Mac/Linux:
 
 ```bash
 source venv/bin/activate
 ```
 
----
-
-### 3️⃣ Install Dependencies
+3. Install dependencies (CPU default):
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements_cpu.txt
 ```
 
----
+GPU users:
 
-### 4️⃣ Run FastAPI Server
+* Verify CUDA version (`check_gpu.py`)
+* If compatible, install GPU dependencies instead:
+
+```bash
+pip install -r requirements_gpu.txt
+```
+
+4. Run server:
 
 ```bash
 uvicorn server:app --reload
 ```
 
-Backend will run at
-
-```
-http://localhost:8000
-```
+Backend will run at: `http://localhost:8000`
 
 ---
 
-# ⚙️ Frontend Setup (Next.js)
+# ⚙️ Manual Frontend Setup (Next.js)
 
-### 1️⃣ Navigate to Frontend
+1. Navigate to frontend:
 
 ```bash
 cd Frontend
 ```
 
----
-
-### 2️⃣ Install Dependencies
+2. Install dependencies:
 
 ```bash
 npm install
-```
-
-or
-
-```bash
+# or
 yarn install
 ```
 
----
-
-### 3️⃣ Run Development Server
+3. Run development server:
 
 ```bash
 npm run dev
 ```
 
-Frontend will run at
-
-```
-http://localhost:3000
-```
+Frontend will run at: `http://localhost:3000`
 
 ---
 
-# 🔑 Environment Variables
+# 🔑 Frontend Environment Variables
 
-Create the following file in the **root of the Frontend folder**
-
-```
-Frontend/.env.local
-```
-
-Add:
+Create `.env.local` in **Frontend** root:
 
 ```env
 NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
 NEXT_PUBLIC_WS_URL=ws://localhost:8000/ws
 ```
 
-### Example Production Configuration
+Production example:
 
 ```env
-NEXT_PUBLIC_BACKEND_URL=https://your-production-backend.com
-NEXT_PUBLIC_WS_URL=wss://your-production-backend.com/ws
-```
-
----
-
-# 🌐 Backend CORS Configuration
-
-Update the **CORS origins** inside:
-
-```
-Backend/server.py
-```
-
-Example configuration:
-
-```python
-from fastapi.middleware.cors import CORSMiddleware
-
-origins = [
-    "http://localhost:3000"
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-```
-
-For production deployment:
-
-```python
-origins = [
-    "https://your-frontend-domain.com"
-]
+NEXT_PUBLIC_BACKEND_URL=https://your-backend.com
+NEXT_PUBLIC_WS_URL=wss://your-backend.com/ws
 ```
 
 ---
@@ -262,7 +225,7 @@ origins = [
 GET /
 ```
 
-Response
+Response:
 
 ```json
 {
@@ -271,22 +234,13 @@ Response
 }
 ```
 
----
-
 ## Upload Video
 
 ```
 POST /upload-video
 ```
 
-Supported formats:
-
-* MP4
-* MOV
-* AVI
-* MKV
-
----
+Supported formats: `.mp4`, `.mov`, `.avi`, `.mkv`
 
 ## WebSocket (Live Plate Detection)
 
@@ -294,7 +248,7 @@ Supported formats:
 ws://localhost:8000/ws
 ```
 
-Example streamed message:
+Example message:
 
 ```json
 {
@@ -303,7 +257,7 @@ Example streamed message:
 }
 ```
 
-When processing completes:
+Video processing complete:
 
 ```json
 {
@@ -313,68 +267,21 @@ When processing completes:
 
 ---
 
-# 📊 Processing Flow
-
-```
-User uploads video
-        │
-        ▼
-FastAPI receives video
-        │
-        ▼
-Video saved to temp folder
-        │
-        ▼
-YOLO detects license plates
-        │
-        ▼
-PaddleOCR extracts text
-        │
-        ▼
-Plates streamed via WebSocket
-        │
-        ▼
-CSV log updated
-        │
-        ▼
-Processed video generated
-```
-
----
-
 # ⚡ GPU Support (Optional)
 
-If your system supports **CUDA**, you can run the models on GPU.
-
-### Install PyTorch GPU version
-
-Example for CUDA 12.1:
+* PyTorch GPU:
 
 ```bash
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+pip install torch==2.5.1+cu121 torchvision==0.20.1+cu121 torchaudio==2.5.1+cu121 --index-url https://download.pytorch.org/whl/cu121
 ```
 
----
-
-### Install PaddlePaddle GPU
-
-Example for CUDA 11.8:
+* PaddlePaddle GPU:
 
 ```bash
-pip install paddlepaddle-gpu==2.6.2.post118 -f https://www.paddlepaddle.org.cn/whl/linux/mkl/avx/stable.html
+pip install paddlepaddle-gpu==2.6.2.post121 -f https://www.paddlepaddle.org.cn/whl/linux/mkl/avx/stable.html
 ```
 
----
-
-# 🧠 Enable GPU in PaddleOCR
-
-Open:
-
-```
-Backend/models/ai_models.py
-```
-
-Modify the PaddleOCR initialization:
+* Enable GPU in `Backend/models/ai_models.py`:
 
 ```python
 ocr = PaddleOCR(
@@ -384,25 +291,23 @@ ocr = PaddleOCR(
 )
 ```
 
+If GPU unavailable, code will **automatically fall back to CPU**.
+
 ---
 
 # 🖥 Hardware Check Utilities
 
-Inside the backend there is a **check folder** used to verify system hardware before running the models.
+Located in:
 
 ```
 Backend/check/
 ```
 
-Scripts included:
+Scripts:
 
-```
-check_cpu.py
-check_gpu.py
-check_cuda.py
-```
-
-These scripts help verify whether your system supports GPU acceleration.
+* `check_cpu.py` → CPU check
+* `check_gpu.py` → GPU check
+* `check_cuda.py` → CUDA check
 
 ---
 
@@ -414,41 +319,25 @@ These scripts help verify whether your system supports GPU acceleration.
 
 # 📂 Temporary Files
 
-Temporary files generated during processing are stored in:
+Stored in:
 
 ```
 Backend/temp/
 ```
 
-Example:
+Includes:
 
 ```
-temp/
-   input_video.mp4
-   detected_output.mp4
-   plates_log.csv
+input_video.mp4
+detected_output.mp4
+plates_log.csv
 ```
 
 ---
 
-# 🧪 Example Use Cases
+# 📜 License
 
-* Smart traffic monitoring
-* Parking lot vehicle tracking
-* Toll booth automation
-* Security surveillance
-* Vehicle access control systems
-
----
-
-# 🚀 Future Improvements
-
-* Real-time CCTV stream processing
-* Multiple camera support
-* Database storage for plate logs
-* Vehicle analytics dashboard
-* Cloud deployment
-* Multi-user job processing
+MIT License
 
 ---
 
@@ -459,7 +348,3 @@ temp/
 Software Engineer
 
 ---
-
-# 📜 License
-
-This project is released under the **MIT License**.
