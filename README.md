@@ -24,7 +24,7 @@ The system detects vehicle license plates from uploaded videos, extracts plate t
 
 ## Backend
 
-* Python
+* Python (3.10.0) only
 * FastAPI
 * OpenCV
 * YOLO (License Plate Detection)
