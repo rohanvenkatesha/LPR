@@ -344,6 +344,7 @@ MIT License
 # 👨‍💻 Author
 
 **[Rohan Venkatesha](https://rohanvenkatesha.vercel.app/)**
+
 Software Engineer
 
 ---
