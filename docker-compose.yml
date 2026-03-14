@@ -13,13 +13,14 @@ services:
     restart: always
 
   frontend:
-    build: ./Frontend
+    build:
+      context: ./Frontend
+      args:  # ✅ must be under build
+        NEXT_PUBLIC_BACKEND_URL: http://localhost:8000
+        NEXT_PUBLIC_WS_URL: ws://localhost:8000/ws
     container_name: lpr_frontend
     ports:
       - "3000:3000"
-    environment:
-      NEXT_PUBLIC_BACKEND_URL: http://backend:8000
-      NEXT_PUBLIC_WS_URL: ws://backend:8000/ws
     depends_on:
       - backend
     restart: always

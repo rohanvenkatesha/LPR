@@ -20,8 +20,6 @@ interface PlateData {
   type?: string; 
 }
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL!;
-const WS_URL = process.env.NEXT_PUBLIC_WS_URL!;
 
 const App: React.FC = () => {
   // --- State Management ---
@@ -56,7 +54,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const checkStatus = async () => {
       try {
-        const response = await fetch(`${BACKEND_URL}/`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/health`);
         setBackendOnline(response.ok);
         if (response.ok) setError(null);
       } catch (err) {
@@ -93,7 +91,7 @@ const App: React.FC = () => {
   const connectWebSocket = () => {
     if (wsRef.current) wsRef.current.close();
     // wsRef.current = new WebSocket('ws://localhost:8000/ws');
-    wsRef.current = new WebSocket(WS_URL);
+    wsRef.current = new WebSocket(`${process.env.NEXT_PUBLIC_WS_URL}`);
     
     wsRef.current.onmessage = (event) => {
       try {
@@ -102,7 +100,7 @@ const App: React.FC = () => {
           const timestamp = Date.now();
           // Points to your CSV endpoint
           // setCsvUrl(`http://localhost:8000/download-csv?t=${timestamp}`);
-          setCsvUrl(`${BACKEND_URL}/download-csv?t=${timestamp}`);
+          setCsvUrl(`${process.env.NEXT_PUBLIC_BACKEND_URL}/download-csv?t=${timestamp}`);
           setVideoComplete(true);
           setIsProcessing(false);
           if (wsRef.current) wsRef.current.close();
@@ -155,7 +153,7 @@ const App: React.FC = () => {
     formData.append('file', file);
     try {
       // const response = await fetch('http://localhost:8000/upload-video', {
-      const response = await fetch(`${BACKEND_URL}/upload-video`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/upload-video`, {
         method: 'POST',
         body: formData,
       });
@@ -278,7 +276,7 @@ const App: React.FC = () => {
                          <FileDown size={14} />
                        </button>
                        <button 
-                        onClick={() => handleDownload(`${BACKEND_URL}/download-video`, 'detected_output.mp4')} 
+                        onClick={() => handleDownload(`${process.env.NEXT_PUBLIC_BACKEND_URL}/download-video`, 'detected_output.mp4')} 
                         disabled={downloading !== null}
                         className="w-full flex items-center justify-between px-4 py-3 bg-[#161b2e] border border-purple-500/30 text-purple-400 rounded hover:bg-purple-500 hover:text-white transition-all group disabled:opacity-50"
                        >
